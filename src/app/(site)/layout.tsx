@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { getSiteSettings } from "@/lib/site-settings";
 
 export default async function SiteLayout({
@@ -18,7 +19,9 @@ export default async function SiteLayout({
         Skip to main content
       </a>
       <Header studioName={settings.studioName} />
-      <main id="main-content">{children}</main>
+      <main id="main-content">
+        <PageTransition>{children}</PageTransition>
+      </main>
       <Footer
         studioName={settings.studioName}
         contactEmail={settings.contactEmail}

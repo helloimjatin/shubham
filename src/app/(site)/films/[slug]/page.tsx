@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { VideoEmbed } from "@/components/editorial/VideoEmbed";
-import { EditorialGallery } from "@/components/editorial/EditorialGallery";
+import { AnimatedGallery } from "@/components/editorial/AnimatedGallery";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 import { getProjectBySlug, getProjectsByType, getSiteSettingsData } from "@/lib/data";
 import { getCanonicalUrl } from "@/lib/seo";
@@ -83,7 +83,7 @@ export default async function FilmDetailPage({ params }: PageProps) {
         </div>
       )}
 
-      {project.images.length > 0 && <EditorialGallery images={project.images} />}
+      {project.images.length > 0 && <AnimatedGallery images={project.images} />}
 
       <nav className="flex justify-between items-center content-container py-12 text-sm text-text-secondary">
         {prev ? (

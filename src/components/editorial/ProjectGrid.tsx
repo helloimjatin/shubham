@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ProjectCard } from "./ProjectCard";
+import { AnimatedProjectCard } from "./AnimatedProjectCard";
 import type { MockProject } from "@/data/mock";
 import { cn } from "@/lib/utils";
+import { ScrollReveal } from "./ScrollReveal";
 
 interface ProjectGridProps {
   projects: MockProject[];
@@ -25,40 +26,55 @@ export function ProjectGrid({
   return (
     <div>
       {categories.length > 1 && (
-        <div className="flex flex-wrap justify-center gap-4 mb-12" role="tablist">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={!activeCategory}
-            onClick={() => setActiveCategory(null)}
-            className={cn(
-              "text-sm text-text-secondary hover:text-text-primary transition-colors",
-              !activeCategory && "text-text-primary"
-            )}
+        <ScrollReveal>
+          <div
+            className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-10 md:mb-14 px-2"
+            role="tablist"
+            aria-label="Filter by category"
           >
-            All
-          </button>
-          {categories.map((cat) => (
             <button
-              key={cat}
               type="button"
               role="tab"
-              aria-selected={activeCategory === cat}
-              onClick={() => setActiveCategory(cat)}
+              aria-selected={!activeCategory}
+              onClick={() => setActiveCategory(null)}
               className={cn(
-                "text-sm text-text-secondary hover:text-text-primary transition-colors",
-                activeCategory === cat && "text-text-primary"
+                "text-xs sm:text-sm tracking-widest uppercase px-4 py-3 touch-target-sm transition-colors",
+                !activeCategory
+                  ? "text-text-primary border-b border-text-primary"
+                  : "text-text-secondary hover:text-text-primary"
               )}
             >
-              {cat}
+              All
             </button>
-          ))}
-        </div>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                role="tab"
+                aria-selected={activeCategory === cat}
+                onClick={() => setActiveCategory(cat)}
+                className={cn(
+                  "text-xs sm:text-sm tracking-widest uppercase px-4 py-3 touch-target-sm transition-colors",
+                  activeCategory === cat
+                    ? "text-text-primary border-b border-text-primary"
+                    : "text-text-secondary hover:text-text-primary"
+                )}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </ScrollReveal>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
-        {filtered.map((project) => (
-          <ProjectCard key={project.id} project={project} basePath={basePath} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 md:gap-x-8 md:gap-y-16">
+        {filtered.map((project, i) => (
+          <AnimatedProjectCard
+            key={project.id}
+            project={project}
+            basePath={basePath}
+            index={i}
+          />
         ))}
       </div>
 

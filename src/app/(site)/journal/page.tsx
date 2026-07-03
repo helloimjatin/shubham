@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JournalCard } from "@/components/editorial/JournalCard";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/editorial/ScrollReveal";
 import { getJournalPosts, getSiteSettingsData } from "@/lib/data";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -14,18 +15,22 @@ export default async function JournalPage() {
   const posts = await getJournalPosts();
 
   return (
-    <div className="section-padding pt-8">
-      <div className="narrow-container text-center mb-12 md:mb-16">
-        <h1 className="display-heading">Journal</h1>
+    <div className="section-padding pt-8 md:pt-12">
+      <ScrollReveal className="narrow-container text-center mb-12 md:mb-20">
+        <p className="section-label">Editorial</p>
+        <h1 className="display-heading mt-3">Journal</h1>
         <p className="mt-6 prose-editorial">
-          Behind the scenes, real wedding stories, and notes from our studio.
+          Behind the scenes, destination guides, filmmaking tips, and real
+          wedding stories from our studio.
         </p>
-      </div>
-      <div className="space-y-20">
+      </ScrollReveal>
+      <StaggerContainer className="space-y-16 md:space-y-28">
         {posts.map((post) => (
-          <JournalCard key={post.id} post={post} />
+          <StaggerItem key={post.id}>
+            <JournalCard post={post} />
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
     </div>
   );
 }

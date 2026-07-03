@@ -1,110 +1,145 @@
 import Link from "next/link";
-import Image from "next/image";
-import { HeroMedia } from "@/components/editorial/HeroMedia";
-import { ProjectCard } from "@/components/editorial/ProjectCard";
-import { getFeaturedProjects, getProjectsByType, getSiteSettingsData } from "@/lib/data";
+import { HeroBanner } from "@/components/sections/HeroBanner";
+import { StatsBar, AwardsStrip } from "@/components/sections/StatsAwards";
+import { ServicesSection } from "@/components/sections/ServicesSection";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { JournalPreview } from "@/components/sections/JournalPreview";
+import {
+  PhilosophySection,
+  ProcessSection,
+  CTABanner,
+} from "@/components/sections/PhilosophyProcess";
+import { AnimatedProjectCard } from "@/components/editorial/AnimatedProjectCard";
+import { ScrollReveal } from "@/components/editorial/ScrollReveal";
+import {
+  mockStats,
+  mockAwards,
+  mockServices,
+  mockTestimonials,
+  mockPhilosophy,
+  mockProcess,
+} from "@/data/mock/content";
+import {
+  getFeaturedProjects,
+  getProjectsByType,
+  getJournalPosts,
+  getSiteSettingsData,
+} from "@/lib/data";
 
 export default async function HomePage() {
-  const [settings, featured, films] = await Promise.all([
+  const [settings, featured, films, photography, journal] = await Promise.all([
     getSiteSettingsData(),
     getFeaturedProjects(),
     getProjectsByType("FILM"),
+    getProjectsByType("PHOTOGRAPHY"),
+    getJournalPosts(),
   ]);
 
   const heroProject = featured[0];
 
   return (
     <>
-      {heroProject ? (
-        <Link href={`/photography/${heroProject.slug}`}>
-          <div className="relative w-full aspect-[3/4] md:aspect-[16/10] overflow-hidden grain-overlay">
-            <Image
-              src={heroProject.coverImage}
-              alt={heroProject.title}
-              fill
-              priority
-              className="object-cover grayscale"
-              sizes="100vw"
-            />
-          </div>
-        </Link>
-      ) : (
-        <HeroMedia settings={settings} />
-      )}
+      <HeroBanner
+        project={heroProject}
+        studioName={settings.studioName}
+        tagline={settings.tagline}
+      />
+
+      <StatsBar stats={mockStats} />
+      <AwardsStrip awards={mockAwards} />
 
       <section className="section-padding">
-        <div className="narrow-container space-y-6 text-center">
+        <ScrollReveal className="narrow-container space-y-6 text-center">
+          <p className="prose-editorial">{settings.aboutContent}</p>
           <p className="prose-editorial">
-            {settings.aboutContent ??
-              "Shubham Video Graphics is a modern wedding photography and filmmaking studio crafting cinematic stories with an editorial eye. For years we have been creating photographs and films that stand the test of time."}
+            Awarded for excellence in wedding filmmaking, we continue to set new
+            benchmarks of storytelling within the wedding realm and beyond —
+            creating photographs and films that families treasure for generations.
           </p>
-          <p className="prose-editorial">
-            Every wedding is unique and so are our films. We set new benchmarks of
-            storytelling within the wedding realm and beyond — celebrating the wild
-            ones, the travellers, and the new-age modern couple who are not afraid
-            to experiment.
-          </p>
-        </div>
+        </ScrollReveal>
       </section>
 
       {featured.length > 0 && (
-        <section className="pb-16 md:pb-24">
-          <div className="space-y-16 md:space-y-24">
-            {featured.slice(0, 3).map((project) => (
-              <ProjectCard
+        <section className="pb-12 md:pb-20">
+          <ScrollReveal className="narrow-container text-center mb-10 md:mb-16">
+            <p className="section-label">Selected Work</p>
+            <h2 className="display-heading mt-3">Recent Stories</h2>
+          </ScrollReveal>
+          <div className="space-y-14 md:space-y-24">
+            {featured.map((project, i) => (
+              <AnimatedProjectCard
                 key={project.id}
                 project={project}
                 basePath={
                   project.type === "PHOTOGRAPHY" ? "/photography" : "/films"
                 }
                 variant="feature"
+                index={i}
               />
             ))}
           </div>
         </section>
       )}
+
+      <ServicesSection services={mockServices} />
+      <PhilosophySection paragraphs={mockPhilosophy} />
 
       {films.length > 0 && (
         <section className="section-padding border-t border-border/50">
-          <div className="narrow-container text-center mb-12">
-            <h2 className="font-display text-2xl md:text-3xl text-text-primary tracking-wide">
-              Award Winning Films
-            </h2>
-          </div>
-          <div className="content-container grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
-            {films.slice(0, 4).map((film) => (
-              <ProjectCard
+          <ScrollReveal className="narrow-container text-center mb-12 md:mb-16">
+            <p className="section-label">Cinema</p>
+            <h2 className="display-heading mt-3">Award Winning Films</h2>
+            <p className="mt-6 prose-editorial max-w-lg mx-auto">
+              Every wedding is unique and so are our films. Handcrafted narratives
+              that capture the soul of your celebration.
+            </p>
+          </ScrollReveal>
+          <div className="content-container grid grid-cols-1 sm:grid-cols-2 gap-10 md:gap-14">
+            {films.map((film, i) => (
+              <AnimatedProjectCard
                 key={film.id}
                 project={film}
                 basePath="/films"
+                index={i}
               />
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Link
-              href="/films"
-              className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-            >
-              Watch All Our Films
+          <ScrollReveal className="text-center mt-12">
+            <Link href="/films" className="inline-link text-sm tracking-widest uppercase">
+              Watch All Films
             </Link>
-          </div>
+          </ScrollReveal>
         </section>
       )}
 
-      <section className="section-padding">
-        <div className="narrow-container text-center">
-          <p className="prose-editorial mb-8">
-            Here are some selected weddings from the past couple of years to
-            showcase the union of two people in the most authentic way possible.
-          </p>
-          <Link
-            href="/contact"
-            className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-          >
-            Get in touch
-          </Link>
-        </div>
-      </section>
+      {photography.length > 0 && (
+        <section className="section-padding border-t border-border/50">
+          <ScrollReveal className="narrow-container text-center mb-12 md:mb-16">
+            <p className="section-label">Still Frames</p>
+            <h2 className="display-heading mt-3">Photography</h2>
+          </ScrollReveal>
+          <div className="content-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
+            {photography.slice(0, 3).map((project, i) => (
+              <AnimatedProjectCard
+                key={project.id}
+                project={project}
+                basePath="/photography"
+                index={i}
+              />
+            ))}
+          </div>
+          <ScrollReveal className="text-center mt-12">
+            <Link href="/photography" className="inline-link text-sm tracking-widest uppercase">
+              View All Photography
+            </Link>
+          </ScrollReveal>
+        </section>
+      )}
+
+      <TestimonialsSection testimonials={mockTestimonials} />
+      <ProcessSection steps={mockProcess} />
+      <JournalPreview posts={journal} />
+      <CTABanner />
     </>
   );
 }

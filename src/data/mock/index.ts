@@ -260,6 +260,66 @@ export const mockProjects: MockProject[] = [
       },
     ],
   },
+  {
+    id: "6",
+    slug: "priya-arjun-mumbai",
+    title: "Priya & Arjun",
+    type: "FILM",
+    category: "Wedding",
+    location: "Mumbai, India",
+    eventDate: "2023-12-09",
+    summary:
+      "A grand Mumbai reception blending tradition with contemporary elegance under a canopy of lights.",
+    storyContent: `<p>Priya and Arjun's Mumbai celebration was a masterclass in modern Indian grandeur. Three days of ceremonies, each more spectacular than the last, culminating in a reception that Mumbai still talks about.</p><p>From the vibrant haldi colours to the candlelit mandap, every frame tells a story of two families becoming one.</p>`,
+    coverImage:
+      "https://images.unsplash.com/photo-1520854221256-17451cc791c5?w=1200&q=80",
+    videoUrl: "https://player.vimeo.com/video/76979871",
+    featured: false,
+    published: true,
+    order: 5,
+    images: [
+      {
+        id: "6a",
+        url: "https://images.unsplash.com/photo-1520854221256-17451cc791c5?w=1600&q=80",
+        alt: "Mumbai wedding reception",
+        order: 0,
+        layoutHint: "full",
+      },
+    ],
+  },
+  {
+    id: "7",
+    slug: "ananya-rohit-goa",
+    title: "Ananya & Rohit",
+    type: "PHOTOGRAPHY",
+    category: "Wedding",
+    location: "Goa, India",
+    eventDate: "2024-04-18",
+    summary:
+      "A barefoot beach wedding where the Arabian Sea met golden hour magic.",
+    storyContent: `<p>Ananya and Rohit dreamed of a wedding where the ocean was their witness. Goa's pristine shores delivered — barefoot vows, sunset portraits, and a celebration that felt like a permanent vacation.</p>`,
+    coverImage:
+      "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80",
+    featured: false,
+    published: true,
+    order: 6,
+    images: [
+      {
+        id: "7a",
+        url: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1600&q=80",
+        alt: "Beach wedding Goa",
+        order: 0,
+        layoutHint: "full",
+      },
+      {
+        id: "7b",
+        url: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80",
+        alt: "Beach ceremony detail",
+        order: 1,
+        layoutHint: "half",
+      },
+    ],
+  },
 ];
 
 export const mockJournalPosts: MockJournalPost[] = [
@@ -286,6 +346,42 @@ export const mockJournalPosts: MockJournalPost[] = [
       "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200&q=80",
     published: true,
     publishedAt: "2024-08-15",
+  },
+  {
+    id: "j3",
+    slug: "udaipur-destination-wedding-guide",
+    title: "Why Udaipur Is Perfect for Your Destination Wedding",
+    excerpt:
+      "Palaces, lakes, and golden light — a filmmaker's guide to the City of Lakes.",
+    content: `<p>Udaipur has become the destination wedding capital of India for good reason. The interplay of water, architecture, and desert light creates a visual palette unlike anywhere else on earth.</p><p>We've filmed over forty weddings in Rajasthan, and each one reveals new corners of this magical city waiting to be discovered.</p>`,
+    coverImage:
+      "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1200&q=80",
+    published: true,
+    publishedAt: "2024-06-01",
+  },
+  {
+    id: "j4",
+    slug: "pre-wedding-film-tips",
+    title: "5 Things to Discuss Before Your Pre-Wedding Film",
+    excerpt:
+      "How to prepare for an engagement session that feels authentic, not staged.",
+    content: `<p>The best pre-wedding films happen when couples forget the camera is there. Here are five conversations we have with every couple before the first frame is shot.</p><p>From wardrobe choices to location scouting, preparation is the secret to films that feel effortless.</p>`,
+    coverImage:
+      "https://images.unsplash.com/photo-1529636798450-6d114e655e80?w=1200&q=80",
+    published: true,
+    publishedAt: "2024-04-20",
+  },
+  {
+    id: "j5",
+    slug: "our-favourite-mumbai-venues",
+    title: "Our Favourite Mumbai Venues for Wedding Films",
+    excerpt:
+      "Locations that consistently deliver stunning light, architecture, and atmosphere.",
+    content: `<p>After years of filming across Mumbai, certain venues keep delivering magic. From heritage ballrooms to rooftop terraces overlooking the Queen's Necklace — here are our top picks for couples planning a Mumbai celebration.</p>`,
+    coverImage:
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&q=80",
+    published: true,
+    publishedAt: "2024-02-10",
   },
 ];
 
