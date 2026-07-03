@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--color-background-token);
+  --color-surface: var(--color-surface-token);
+  --color-text-primary: var(--color-text-primary-token);
+  --color-text-secondary: var(--color-text-secondary-token);
+  --color-accent: var(--color-accent-token);
+  --color-border: var(--color-border-token);
+
+  --font-display: var(--font-bodoni), Georgia, serif;
+  --font-body: var(--font-bodoni), Georgia, serif;
+}
+
+:root {
+  /* House On The Clouds inspired palette */
+  --color-background-token: #f0e9e0;
+  --color-surface-token: #f0e9e0;
+  --color-text-primary-token: rgba(0, 0, 0, 0.75);
+  --color-text-secondary-token: rgba(0, 0, 0, 0.59);
+  --color-accent-token: rgba(0, 0, 0, 0.75);
+  --color-border-token: rgba(0, 0, 0, 0.12);
+  --space-section: clamp(3rem, 8vw, 6rem);
+  --space-content: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background-token);
+  color: var(--color-text-secondary-token);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  color: var(--color-text-primary-token);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.prose-editorial {
+  font-family: var(--font-body);
+  line-height: 1.85;
+  color: var(--color-text-secondary-token);
+  text-align: center;
+}
+
+.prose-editorial p {
+  margin-bottom: 1.5rem;
+}
+
+.section-padding {
+  padding-top: var(--space-section);
+  padding-bottom: var(--space-section);
+}
+
+.content-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-content);
+  padding-right: var(--space-content);
+}
+
+.narrow-container {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-content);
+  padding-right: var(--space-content);
+}
+
+.display-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.story-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 400;
+  text-align: center;
+  color: var(--color-text-primary-token);
+  margin-bottom: 2rem;
+}
+
+.credits-block {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.9;
+  text-align: center;
+  color: var(--color-text-secondary-token);
+}
+
+.grain-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus,
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
